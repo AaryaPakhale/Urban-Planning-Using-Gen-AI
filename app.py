@@ -57,7 +57,8 @@ uploaded_file = st.file_uploader("Upload an image", type=['png', 'jpg', 'jpeg'])
 # Text input for prompt
 prompt = st.text_input("Enter your prompt")
 
-if st.button("Submit"):
+# Button to get city planning suggestions
+if st.button("Get City Planning Suggestions"):
     if uploaded_file is not None and prompt:
         # Convert image to bytes
         image_bytes = uploaded_file.read()
@@ -68,21 +69,6 @@ if st.button("Submit"):
         st.success("Data submitted successfully!")
     else:
         st.error("Please upload an image and enter a prompt.")
-
-# Display stored images and prompts
-if st.button("Show Stored Data"):
-    conn = sqlite3.connect(DATABASE_NAME)
-    c = conn.cursor()
-    c.execute('SELECT * FROM images')
-    rows = c.fetchall()
-    
-    for row in rows:
-        st.image(row[1], caption=f"Prompt: {row[2]}", use_column_width=True)
-
-    conn.close()
-
-# Button to get city planning suggestions
-if st.button("Get City Planning Suggestions"):
     if prompt:
         conn = sqlite3.connect(DATABASE_NAME)
         c = conn.cursor()
@@ -104,3 +90,15 @@ if st.button("Get City Planning Suggestions"):
         st.write(suggestions)
     else:
         st.error("Please enter a prompt to get suggestions.")
+
+# # Display stored images and prompts
+# if st.button("Show Stored Data"):
+#     conn = sqlite3.connect(DATABASE_NAME)
+#     c = conn.cursor()
+#     c.execute('SELECT * FROM images')
+#     rows = c.fetchall()
+    
+#     for row in rows:
+#         st.image(row[1], caption=f"Prompt: {row[2]}", use_column_width=True)
+
+#     conn.close()

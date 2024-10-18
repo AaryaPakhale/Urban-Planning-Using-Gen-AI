@@ -1,0 +1,66 @@
+{
+  "type": "object",
+  "properties": {
+    "issues_identified": {
+      "type": "array",
+      "description": "List of issues identified from the map and data.",
+      "items": {
+        "type": "string",
+        "description": "A brief description of each issue."
+      }
+    },
+    "solutions": {
+      "type": "array",
+      "description": "List of proposed solutions for the identified issues.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "issue": {
+            "type": "string",
+            "description": "The issue being addressed."
+          },
+          "solution": {
+            "type": "string",
+            "description": "A detailed description of the solution."
+          },
+          "expected_outcome": {
+            "type": "string",
+            "description": "The positive outcomes expected from the solution."
+          }
+        },
+        "required": ["issue", "solution", "expected_outcome"]
+      }
+    },
+    "feasibility_analysis": {
+      "type": "string",
+      "description": "An analysis of how feasible the proposed solutions are, considering budget, timeframe, and sustainability."
+    },
+    "coordinates": {
+      "type": "array",
+      "description": "Coordinates of the areas on the map that should be highlighted for the changes.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "x": {
+            "type": "integer",
+            "description": "The x-coordinate of the top-left corner of the highlighted area."
+          },
+          "y": {
+            "type": "integer",
+            "description": "The y-coordinate of the top-left corner of the highlighted area."
+          },
+          "w": {
+            "type": "integer",
+            "description": "The width of the highlighted area."
+          },
+          "h": {
+            "type": "integer",
+            "description": "The height of the highlighted area."
+          }
+        },
+        "required": ["x", "y", "w", "h"]
+      }
+    }
+  },
+  "required": ["issues_identified", "solutions", "feasibility_analysis", "coordinates"]
+}

@@ -2,6 +2,7 @@ from groq import Groq
 from dotenv import load_dotenv
 import os
 import base64
+import json
 
 
 def encode_image(image_path):
@@ -16,7 +17,10 @@ def get_city_planning_suggestions(issue, pic):
     Groq.api_key = api_key
 
     base64_image = encode_image(pic)
-
+    with open("prompt.txt", "r") as f:
+        prompt = f.read()
+    prompt = prompt + issue
+    print(prompt)
     completion = client.chat.completions.create(
         model="llama-3.2-11b-vision-preview",
         messages=[
@@ -25,7 +29,7 @@ def get_city_planning_suggestions(issue, pic):
                 "content": [
                     {
                         "type": "text",
-                        "text": "You are an expert city planner who is experienced in suggesting appropriate suggestions given the map of a region and the issues that are currently being faced in the region. You might also be provided with other information about the project, such as possible budget, economic, and ecological conditions of the area. Whenever you give a suggestion, you should make sure it doesn't create new problems and that the solution is equitable and good for all. After you have given the suggestions I would also like you to give an image prompt that I can pass to a diffusion model that will alter my original map to the map after these changes are made. So your final output should contain the following: 1. Issues identified, 2. Possible Fix, 3. Feasibility Analysis, 4. Image Prompt\n\nIssue:\n" + issue
+                        "text": prompt
                     },
                     {
                         "type": "image_url",
@@ -40,6 +44,7 @@ def get_city_planning_suggestions(issue, pic):
         max_tokens=1024,
         top_p=1,
         stream=False,
+        # response_format={"type": "json_object"},
         stop=None,
     )
 
