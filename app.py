@@ -2,6 +2,7 @@ import streamlit as st
 from PIL import Image
 import sqlite3
 import os
+from vlm import get_city_planning_suggestions
 
 # Set up the SQLite database
 DATABASE_NAME = 'image_prompts.db'
@@ -79,3 +80,27 @@ if st.button("Show Stored Data"):
         st.image(row[1], caption=f"Prompt: {row[2]}", use_column_width=True)
 
     conn.close()
+
+# Button to get city planning suggestions
+if st.button("Get City Planning Suggestions"):
+    if prompt:
+        conn = sqlite3.connect(DATABASE_NAME)
+        c = conn.cursor()
+        c.execute('SELECT * FROM images')
+        rows = c.fetchall()
+        row = rows[-1]
+        # st.image(row[1], caption=f"Prompt: {row[2]}", use_column_width=True)
+        # Save the image to a temporary file
+        temp_image_path = os.path.join("temp_image.png")
+        with open(temp_image_path, "wb") as f:
+            f.write(row[1])
+        
+        # Pass the path to the image instead of its content
+        suggestions = get_city_planning_suggestions(prompt, temp_image_path)
+        
+        # Remove the temporary file after use
+        os.remove(temp_image_path)
+        st.write("City Planning Suggestions:")
+        st.write(suggestions)
+    else:
+        st.error("Please enter a prompt to get suggestions.")
