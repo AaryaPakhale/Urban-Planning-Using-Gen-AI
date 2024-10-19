@@ -47,9 +47,13 @@ def get_city_planning_suggestions(issue, pic):
         # response_format={"type": "json_object"},
         stop=None,
     )
+    
+    # return completion.choices[0].message.content
+    output = completion.choices[0].message.content
+    text_output = output["solutions"]  # Exclude coordinates
+    coordinates = output["coordinates"]  # Separate coordinates
 
-    return completion.choices[0].message.content
-
+    return text_output, coordinates
 # Example usage:
 # issue = "The city is facing severe accommodation issues. The city planner aims to increase affordable housing units by 20%, enhancing social equity."
 # pic = "https://upload.wikimedia.org/wikipedia/commons/1/1c/Map_of_LA_City_Council_Districts.png?20130207203753"
