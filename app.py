@@ -41,6 +41,7 @@ st.markdown(
         background-color: rgba(0, 0, 0, 0.8); /* Input boxes background */
         border: 1px solid #c23e9d; /* Input boxes border */
         border-radius: 5px; /* Rounded corners */
+        color: white; 
     }
     .stTextInput:focus, .stButton:hover {
         background-color: rgba(255, 255, 255, 1); /* Input boxes background on focus */
