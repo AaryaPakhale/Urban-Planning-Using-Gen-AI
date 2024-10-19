@@ -32,7 +32,10 @@ st.markdown(
     """
     <style>
     .stApp {
-        background: linear-gradient(to right, #c23e9d, #7500c0); /* Background gradient */
+        background-image: url('https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.istockphoto.com%2Fphotos%2Fcity-buildings&psig=AOvVaw2gpb9vZZqvrDuIsPBWy2Tz&ust=1729432301581000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCLjXhcrLmokDFQAAAAAdAAAAABAJ'); /* Background image URL */
+        background-size: cover; /* Cover the whole area */
+        background-repeat: no-repeat;
+        background-attachment: fixed;
     }
     .stTextInput, .stButton {
         background-color: rgba(255, 255, 255, 0.8); /* Input boxes background */
@@ -42,6 +45,11 @@ st.markdown(
     .stTextInput:focus, .stButton:hover {
         background-color: rgba(255, 255, 255, 1); /* Input boxes background on focus */
         border-color: #7500c0; /* Border color on focus */
+    }
+    .creator-links {
+        display: flex;
+        justify-content: space-around;
+        padding: 20px 0;
     }
     </style>
     """,
@@ -107,6 +115,34 @@ if st.button("Get City Planning Suggestions"):
         
     else:
         st.error("Please enter a prompt to get suggestions.")
+st.markdown("""
+<div class="creator-links">
+    <div>
+        <a href="https://github.com/NisargBhavsar25" target="_blank">Nisarg Bhavsar</a> | 
+        <a href="https://www.linkedin.com/in/nisarg-bhavsar/" target="_blank">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/0/01/LinkedIn_Logo.svg" width="20" height="20">
+        </a>
+    </div>
+    <div>
+        <a href="https://github.com/AaryaPakhale" target="_blank">Aarya Pakhale</a> | 
+        <a href="http://linkedin.com/in/aarya-pakhale-0b9788217" target="_blank">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/0/01/LinkedIn_Logo.svg" width="20" height="20">
+        </a>
+    </div>
+    <div>
+        <a href="https://github.com/meeranair186" target="_blank">Meera Nair</a> | 
+        <a href="https://www.linkedin.com/in/meera-nair-8686ba259/" target="_blank">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/0/01/LinkedIn_Logo.svg" width="20" height="20">
+        </a>
+    </div>
+    <div>
+        <a href="https://github.com/Shreya6901" target="_blank">Shreya Singh</a> | 
+        <a href="https://www.linkedin.com/in/singhshreya2003/" target="_blank">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/0/01/LinkedIn_Logo.svg" width="20" height="20">
+        </a>
+    </div>
+</div>
+""", unsafe_allow_html=True)
 
 # # Display stored images and prompts
 # if st.button("Show Stored Data"):
