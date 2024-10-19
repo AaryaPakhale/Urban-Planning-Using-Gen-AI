@@ -57,7 +57,7 @@ st.markdown(
 )
 
 # Streamlit app interface
-st.title("Optimize City Planning Solution")
+st.markdown('<h1 class="title">Optimize City Planning Solution</h1>', unsafe_allow_html=True)
 
 # # File uploader for image input
 # uploaded_file = st.file_uploader("Upload an image", type=['png', 'jpg', 'jpeg'])
