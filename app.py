@@ -51,11 +51,22 @@ st.markdown(
 # Streamlit app interface
 st.title("Image and Prompt Upload")
 
-# File uploader for image input
-uploaded_file = st.file_uploader("Upload an image", type=['png', 'jpg', 'jpeg'])
+# # File uploader for image input
+# uploaded_file = st.file_uploader("Upload an image", type=['png', 'jpg', 'jpeg'])
 
 # Text input for prompt
 prompt = st.text_input("Enter your prompt")
+# Text input for Budget
+budget = st.text_input("Enter your budget")
+
+# # Text input for prompt
+# prompt = st.text_input("Enter your prompt")
+
+# Text input for city
+city = st.text_input("Enter the city")
+
+# Dropdown for amenities
+amenities = st.selectbox("Select amenities", ["Amenity 1", "Amenity 2", "Amenity 3"])
 
 # Button to get city planning suggestions
 if st.button("Get City Planning Suggestions"):
