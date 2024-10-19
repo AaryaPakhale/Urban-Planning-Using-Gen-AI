@@ -32,7 +32,7 @@ st.markdown(
     """
     <style>
     .stApp {
-        background-image: url('https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.istockphoto.com%2Fphotos%2Fcity-buildings&psig=AOvVaw2gpb9vZZqvrDuIsPBWy2Tz&ust=1729432301581000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCLjXhcrLmokDFQAAAAAdAAAAABAJ'); /* Background image URL */
+        background-image: url('https://www.creativefabrica.com/wp-content/uploads/2020/03/08/City-with-apartment-and-shooping-mall-Graphics-3366119-1.jpg '); /* Background image URL */
         background-size: cover; /* Cover the whole area */
         background-repeat: no-repeat;
         background-attachment: fixed;
