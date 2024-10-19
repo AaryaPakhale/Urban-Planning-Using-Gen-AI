@@ -49,7 +49,7 @@ st.markdown(
 )
 
 # Streamlit app interface
-st.title("Image and Prompt Upload")
+st.title("Optimize City Planning Solution")
 
 # # File uploader for image input
 # uploaded_file = st.file_uploader("Upload an image", type=['png', 'jpg', 'jpeg'])
@@ -57,7 +57,7 @@ st.title("Image and Prompt Upload")
 # Text input for prompt
 prompt = st.text_input("Enter your prompt")
 # Text input for Budget
-budget = st.text_input("Enter your budget")
+# budget = st.text_input("Enter your budget")
 
 # # Text input for prompt
 # prompt = st.text_input("Enter your prompt")
@@ -91,14 +91,20 @@ if st.button("Get City Planning Suggestions"):
         temp_image_path = os.path.join("temp_image.png")
         with open(temp_image_path, "wb") as f:
             f.write(row[1])
-        
+            
+        map_image_path = get_google_maps_image(city)
         # Pass the path to the image instead of its content
-        suggestions = get_city_planning_suggestions(prompt, temp_image_path)
+        suggestions, coordinates = get_city_planning_suggestions(prompt, map_image_path) 
+        
+        image = cv2.imread(map_image_path) 
+        highlighted_image = highlight_pixels(image, coordinates)
         
         # Remove the temporary file after use
         os.remove(temp_image_path)
         st.write("City Planning Suggestions:")
         st.write(suggestions)
+        st.image(highlighted_image, caption='Final Map', use_column_width=True)
+        
     else:
         st.error("Please enter a prompt to get suggestions.")
 
