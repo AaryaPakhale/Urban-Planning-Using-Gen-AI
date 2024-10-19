@@ -1,0 +1,5 @@
+streamlit
+Pillow
+sqlite3
+python-dotenv
+groq
