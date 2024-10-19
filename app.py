@@ -38,7 +38,7 @@ st.markdown(
         background-attachment: fixed;
     }
     .stTextInput, .stButton {
-        background-color: rgba(255, 255, 255, 0.8); /* Input boxes background */
+        background-color: rgba(0, 0, 0, 0.8); /* Input boxes background */
         border: 1px solid #c23e9d; /* Input boxes border */
         border-radius: 5px; /* Rounded corners */
     }
@@ -120,25 +120,25 @@ st.markdown("""
     <div>
         <a href="https://github.com/NisargBhavsar25" target="_blank">Nisarg Bhavsar</a> | 
         <a href="https://www.linkedin.com/in/nisarg-bhavsar/" target="_blank">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/0/01/LinkedIn_Logo.svg" width="20" height="20">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/0/01/LinkedIn_Logo.svg" width="60" height="20">
         </a>
     </div>
     <div>
         <a href="https://github.com/AaryaPakhale" target="_blank">Aarya Pakhale</a> | 
         <a href="http://linkedin.com/in/aarya-pakhale-0b9788217" target="_blank">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/0/01/LinkedIn_Logo.svg" width="20" height="20">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/0/01/LinkedIn_Logo.svg" width="60" height="20">
         </a>
     </div>
     <div>
         <a href="https://github.com/meeranair186" target="_blank">Meera Nair</a> | 
         <a href="https://www.linkedin.com/in/meera-nair-8686ba259/" target="_blank">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/0/01/LinkedIn_Logo.svg" width="20" height="20">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/0/01/LinkedIn_Logo.svg" width="60" height="20">
         </a>
     </div>
     <div>
         <a href="https://github.com/Shreya6901" target="_blank">Shreya Singh</a> | 
         <a href="https://www.linkedin.com/in/singhshreya2003/" target="_blank">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/0/01/LinkedIn_Logo.svg" width="20" height="20">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/0/01/LinkedIn_Logo.svg" width="60" height="20">
         </a>
     </div>
 </div>
