@@ -5,4 +5,5 @@ groq
 osmnx
 matplotlib
 opencv-python
+opencv-python-headless
 numpy
