@@ -116,27 +116,28 @@ amenities = st.selectbox("Select Amenities", ["Hospital",
 
 # Button to get city planning suggestions
 if st.button("Get City Planning Suggestions"):
-    if uploaded_file is not None and prompt:
+    if prompt:
         # Convert image to bytes
-        image_bytes = uploaded_file.read()
+        # image_bytes = uploaded_file.read()
         
         # Insert data into database
-        insert_data(image_bytes, prompt)
-        
+        insert_data(prompt, amenities, city)
         st.success("Data submitted successfully!")
+        
     else:
-        st.error("Please upload an image and enter a prompt.")
-    if prompt:
-        conn = sqlite3.connect(DATABASE_NAME)
-        c = conn.cursor()
-        c.execute('SELECT * FROM images')
-        rows = c.fetchall()
-        row = rows[-1]
+        st.error("Please enter a prompt.")
+        
+    # if prompt:
+    #     conn = sqlite3.connect(DATABASE_NAME)
+    #     c = conn.cursor()
+    #     c.execute('SELECT * FROM images')
+    #     rows = c.fetchall()
+    #     row = rows[-1]
         # st.image(row[1], caption=f"Prompt: {row[2]}", use_column_width=True)
         # Save the image to a temporary file
-        temp_image_path = os.path.join("temp_image.png")
-        with open(temp_image_path, "wb") as f:
-            f.write(row[1])
+        # temp_image_path = os.path.join("temp_image.png")
+        # with open(temp_image_path, "wb") as f:
+        #     f.write(row[1])
             
         map_image_path = "city_colored_map_with_amenities.jpg"
         save_colored_city_map(city, amenities, filename=map_image_path)
