@@ -85,6 +85,7 @@ This will retrieve the map from OpenStreetMap, process it through the VLM, and s
 ### **5. Example Usage**
 
 Input:
+
 -City Name: Bangalore
 -Amenities: Hospitals, Parks
 -Problem: "Insufficient healthcare facilities in the eastern areas."
