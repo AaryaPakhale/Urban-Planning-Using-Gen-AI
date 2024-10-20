@@ -47,6 +47,12 @@ st.markdown(
         background-color: rgba(255, 255, 255, 1); /* Input boxes background on focus */
         border-color: #7500c0; /* Border color on focus */
     }
+    .select-amenities-label {
+        font-weight: bold; /* Make text bold */
+        font-size: 20px; /* Increase font size by 5 units (assuming the base size is 15px) */
+        color: black; /* Set text color to black */
+        margin-bottom: 5px;
+    }
     .creator-links {
         display: flex;
         justify-content: space-around;
