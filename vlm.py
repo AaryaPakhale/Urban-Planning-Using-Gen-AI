@@ -50,9 +50,9 @@ def get_city_planning_suggestions(issue, pic):
     
     # return completion.choices[0].message.content
     output = completion.choices[0].message.content
-    text_output = output["solutions"]  # Exclude coordinates
-    coordinates = output["coordinates"]  # Separate coordinates
-
+    text_output = output["Issues Identified:", "Solutions:","Feasibility Analysis:"]  # Exclude coordinates
+    coordinates = output["Coordinates:"]  # Separate coordinates
+  
     return text_output, coordinates
 # Example usage:
 # issue = "The city is facing severe accommodation issues. The city planner aims to increase affordable housing units by 20%, enhancing social equity."
