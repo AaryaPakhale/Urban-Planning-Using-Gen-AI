@@ -7,31 +7,88 @@ Original file is located at
     https://colab.research.google.com/drive/1zmT04tAZ9SNcn7I5efDyCyeFAdG4b6Ta
 """
 
+# import osmnx as ox
+# import matplotlib.pyplot as plt
+
+# import matplotlib.lines as mlines
+# from PIL import Image
+
+# def save_colored_city_map(city_name, amenity, filename="city_colored_map_with_amenities.jpg"):
+#     # Download street network
+#     graph = ox.graph_from_place(city_name, network_type='all')
+
+#     # Plot street network (streets as one color)
+#     fig, ax = ox.plot_graph(graph, show=False, close=False, bgcolor='white', edge_color='gray', node_size=0)
+
+#     # Get railways and plot (railways in another color)
+#     railways = ox.geometries_from_place(city_name, tags={'railway': True})
+#     for idx, row in railways.iterrows():
+#         if 'geometry' in row and row['geometry'].geom_type == 'LineString':
+#             x, y = row['geometry'].xy
+#             ax.plot(x, y, color='red', linewidth=1, label='_nolegend_')  # Railways, but suppress duplicate label
+
+#     # Plot amenities (e.g., hospitals, restaurants, etc.)
+#     amenity_data = ox.geometries_from_place(city_name, tags={'amenity': amenity})
+#     for idx, row in amenity_data.iterrows():
+#         if 'geometry' in row and row['geometry'].geom_type == 'Point':
+#             ax.plot(row['geometry'].x, row['geometry'].y, marker='o', color='blue', markersize=5, label='_nolegend_')  # suppress duplicate label
+
+#     # Create custom legend items
+#     railway_legend = mlines.Line2D([], [], color='red', label='Railway', linewidth=2)
+#     amenity_legend = mlines.Line2D([], [], color='blue', marker='o', linestyle='None', markersize=5, label=amenity.capitalize())
+
+#     # Add the legend to the plot
+#     plt.legend(handles=[railway_legend, amenity_legend], loc='upper right')
+
+#     # Save the plot
+#     plt.title(f"Map of {city_name} with {amenity.capitalize()} and Railways")
+#     plt.savefig(filename, format='jpg', dpi=300, bbox_inches='tight')
+#     plt.close()
+#     image = Image.open(filename)
+#     return image
+
 import osmnx as ox
 import matplotlib.pyplot as plt
-
 import matplotlib.lines as mlines
 from PIL import Image
 
 def save_colored_city_map(city_name, amenity, filename="city_colored_map_with_amenities.jpg"):
     # Download street network
     graph = ox.graph_from_place(city_name, network_type='all')
+    print(f"Graph data for {city_name} fetched successfully.")
 
     # Plot street network (streets as one color)
     fig, ax = ox.plot_graph(graph, show=False, close=False, bgcolor='white', edge_color='gray', node_size=0)
 
     # Get railways and plot (railways in another color)
     railways = ox.geometries_from_place(city_name, tags={'railway': True})
+    print(f"Railway data for {city_name}:")
+    print(railways.head())
+
     for idx, row in railways.iterrows():
         if 'geometry' in row and row['geometry'].geom_type == 'LineString':
             x, y = row['geometry'].xy
             ax.plot(x, y, color='red', linewidth=1, label='_nolegend_')  # Railways, but suppress duplicate label
 
-    # Plot amenities (e.g., hospitals, restaurants, etc.)
-    amenity_data = ox.geometries_from_place(city_name, tags={'amenity': amenity})
+    # Fetch and plot amenities
+    try:
+        amenity_data = ox.geometries_from_place(city_name, tags={'amenity': amenity})
+        print(f"Amenity data for {city_name} with amenity {amenity}:")
+        print(amenity_data.head())  # Show first few entries
+    except ox.errors.InsufficientResponseError as e:
+        print(f"Error fetching amenities: {e}")
+        return None
+
+    # Check for empty responses
+    if amenity_data.empty:
+        print(f"No amenities found for {amenity} in {city_name}.")
+        return None
+
+    # Plot the amenities on the map
     for idx, row in amenity_data.iterrows():
+        print(f"Processing amenity at index {idx}, geometry type: {row['geometry'].geom_type}")
         if 'geometry' in row and row['geometry'].geom_type == 'Point':
-            ax.plot(row['geometry'].x, row['geometry'].y, marker='o', color='blue', markersize=5, label='_nolegend_')  # suppress duplicate label
+            ax.plot(row['geometry'].x, row['geometry'].y, marker='o', color='blue', markersize=5, label='_nolegend_')
 
     # Create custom legend items
     railway_legend = mlines.Line2D([], [], color='red', label='Railway', linewidth=2)
@@ -44,5 +101,8 @@ def save_colored_city_map(city_name, amenity, filename="city_colored_map_with_am
     plt.title(f"Map of {city_name} with {amenity.capitalize()} and Railways")
     plt.savefig(filename, format='jpg', dpi=300, bbox_inches='tight')
     plt.close()
+    print(f"Map saved as {filename}")
+
+    # Open and return the image
     image = Image.open(filename)
     return image
