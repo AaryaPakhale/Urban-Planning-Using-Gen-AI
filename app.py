@@ -116,7 +116,7 @@ amenities = st.selectbox("Select Amenities", ["Hospital",
 
 # Button to get city planning suggestions
 if st.button("Get City Planning Suggestions"):
-    if prompt:
+    if (prompt and city and amenities):
         # Convert image to bytes
         # image_bytes = uploaded_file.read()
         
@@ -124,21 +124,6 @@ if st.button("Get City Planning Suggestions"):
         insert_data(prompt, amenities, city)
         st.success("Data submitted successfully!")
         
-    else:
-        st.error("Please enter a prompt.")
-        
-    # if prompt:
-    #     conn = sqlite3.connect(DATABASE_NAME)
-    #     c = conn.cursor()
-    #     c.execute('SELECT * FROM images')
-    #     rows = c.fetchall()
-    #     row = rows[-1]
-        # st.image(row[1], caption=f"Prompt: {row[2]}", use_column_width=True)
-        # Save the image to a temporary file
-        # temp_image_path = os.path.join("temp_image.png")
-        # with open(temp_image_path, "wb") as f:
-        #     f.write(row[1])
-            
         map_image_path = "city_colored_map_with_amenities.jpg"
         save_colored_city_map(city, amenities, filename=map_image_path)
         # Pass the path to the image instead of its content
@@ -154,7 +139,20 @@ if st.button("Get City Planning Suggestions"):
         st.image(highlighted_image, caption='Final Map', use_column_width=True)
         
     else:
-        st.error("Please enter a prompt to get suggestions.")
+        st.error("Please enter a valid prompt, city and amenity.")
+        
+    # if prompt:
+    #     conn = sqlite3.connect(DATABASE_NAME)
+    #     c = conn.cursor()
+    #     c.execute('SELECT * FROM images')
+    #     rows = c.fetchall()
+    #     row = rows[-1]
+        # st.image(row[1], caption=f"Prompt: {row[2]}", use_column_width=True)
+        # Save the image to a temporary file
+        # temp_image_path = os.path.join("temp_image.png")
+        # with open(temp_image_path, "wb") as f:
+        #     f.write(row[1])
+        
 st.markdown("""
 <div class="creator-links">
     <div>
