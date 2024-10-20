@@ -81,36 +81,36 @@ prompt = st.text_input("Enter your prompt")
 city = st.text_input("Enter the city")
 
 # Dropdown for amenities
-amenities = st.selectbox("Select Amenities", [Hospital
-School: amenity=school
-University: amenity=university
-Kindergarten: amenity=kindergarten
-Library: amenity=library
-Post Office: amenity=post_office
-Police Station: amenity=police
-Fire Station: amenity=fire_station
-Community Center: amenity=community_centre
-Pharmacy: amenity=pharmacy
-Restaurant: amenity=restaurant
-Café: amenity=cafe
-Bar: amenity=bar
-Supermarket: amenity=supermarket
-Bank: amenity=bank
-Atm: amenity=atm
-Gym: amenity=gym
-Park: amenity=park
-Public Toilet: amenity=toilets
-Bus Station: amenity=bus_station
-Train Station: amenity=train_station
-Airport: aeroway=aerodrome
-Tourist Information: amenity=tourist_information
-Waste Disposal: amenity=waste_basket
-Dog Park: amenity=dog_park
-Bicycle Rental: amenity=bicycle_rental
-Hotel: amenity=hotel
-Motel: amenity=motel
-Camping: amenity=camp_site
-Beach: amenity=beach])
+amenities = st.selectbox("Select Amenities", ["Hospital",
+"School",
+"University",
+"Kindergarten",
+"Library",
+"Post_office",
+"Police",
+"Fire_station",
+"Community_centre",
+"Pharmacy",
+"Restaurant",
+"Cafe",
+"Bar",
+"Supermarket",
+"Bank",
+"Atm",
+"Gym",
+"Park",
+"Toilets",
+"Bus_station",
+"Train_station",
+"Aerodrome",
+"Tourist_information",
+"Waste_basket",
+"Dog_park",
+"Bicycle_rental",
+"Hotel",
+"Motel",
+"Camp_site",
+"Beach"])
 
 # Button to get city planning suggestions
 if st.button("Get City Planning Suggestions"):
