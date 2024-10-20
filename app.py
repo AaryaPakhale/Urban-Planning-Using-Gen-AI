@@ -7,25 +7,42 @@ from openstreetmap_api import save_colored_city_map
 import cv2
 
 # Set up the SQLite database
-DATABASE_NAME = 'image_prompts.db'
+DATABASE_NAME = 'city_planning.db'
 
+# def create_table():
+#     conn = sqlite3.connect(DATABASE_NAME)
+#     c = conn.cursor()
+#     c.execute('''CREATE TABLE IF NOT EXISTS images
+#                  (id INTEGER PRIMARY KEY AUTOINCREMENT,
+#                  image BLOB,
+#                  prompt TEXT)''')
+#     conn.commit()
+#     conn.close()
+
+# Function to create the table
 def create_table():
     conn = sqlite3.connect(DATABASE_NAME)
     c = conn.cursor()
-    c.execute('''CREATE TABLE IF NOT EXISTS images
-                 (id INTEGER PRIMARY KEY AUTOINCREMENT,
-                 image BLOB,
-                 prompt TEXT)''')
+    # Creating table with columns prompt, city, and amenities
+    c.execute('''
+        CREATE TABLE IF NOT EXISTS city_data (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            prompt TEXT,
+            city TEXT,
+            amenities TEXT
+        )
+    ''')
     conn.commit()
     conn.close()
 
-def insert_data(image, prompt):
+def insert_data(prompt, city, amenities):
     conn = sqlite3.connect(DATABASE_NAME)
     c = conn.cursor()
-    c.execute('INSERT INTO images (image, prompt) VALUES (?, ?)', (image, prompt))
+    # Inserting values into the table
+    c.execute('INSERT INTO city_data (prompt, city, amenities) VALUES (?, ?, ?)', (prompt, city, amenities))
     conn.commit()
     conn.close()
-
+    
 # Create the table if it doesn't exist
 create_table()
 
@@ -72,7 +89,7 @@ st.markdown('<h1 class="title">Optimize City Planning Solution</h1>', unsafe_all
 # uploaded_file = st.file_uploader("Upload an image", type=['png', 'jpg', 'jpeg'])
 
 # Text input for prompt
-prompt = st.text_input("Enter your prompt")
+prompt = st.text_input("Enter your Problem")
 # Text input for Budget
 # budget = st.text_input("Enter your budget")
 
@@ -80,7 +97,7 @@ prompt = st.text_input("Enter your prompt")
 # prompt = st.text_input("Enter your prompt")
 
 # Text input for city
-city = st.text_input("Enter the city")
+city = st.text_input("Enter the City")
 
 # Dropdown for amenities
 amenities = st.selectbox("Select Amenities", ["Hospital",
@@ -121,11 +138,12 @@ if st.button("Get City Planning Suggestions"):
         # image_bytes = uploaded_file.read()
         
         # Insert data into database
-        insert_data(prompt, amenities, city)
+        insert_data(prompt, city, amenities)
         st.success("Data submitted successfully!")
         
         map_image_path = "city_colored_map_with_amenities.jpg"
         save_colored_city_map(city, amenities, filename=map_image_path)
+        
         # Pass the path to the image instead of its content
         suggestions, coordinates = get_city_planning_suggestions(prompt, map_image_path) 
         
