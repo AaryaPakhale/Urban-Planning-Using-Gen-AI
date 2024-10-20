@@ -1,32 +1,40 @@
-# **City Planning Suggestions using Vision-Language Model (VLM) and Google Maps**
+# **City Planning Suggestions using Vision-Language Model (VLM) and OpenStreetMap API**
 
-This project uses a Vision-Language Model (VLM) to generate sustainable and budget-conscious city planning suggestions based on location-specific maps retrieved from Google Maps. The model analyzes regional maps and outputs both text suggestions and a modified map image highlighting the areas where suggested changes should be implemented.
+This project provides sustainable and budget-conscious city planning solutions by analyzing location-specific maps. It uses a Vision-Language Model (VLM) and OpenStreetMap (OSM) to generate suggestions for urban infrastructure improvements. The solution involves fetching a city map with amenities, processing the map and a problem-specific prompt through the VLM, and returning both textual suggestions and a highlighted map image showing where the suggested changes should be implemented.
 
 ## **Project Structure**
 
 ```bash
-
 .
-├── app.py                   # Streamlit frontend for interacting with the model
-├── vlm.py                   # Vision-Language Model for generating suggestions
-├── google_maps.py           # Script to fetch map images from Google Maps API
-├── highlight_pixels.py      # Script to highlight specific areas in the image
-├── pipeline.py              # Integrates the workflow from input to output
-├── requirements.txt         # Required dependencies for the project
-└── README.md                # Project documentation
+├── app.py # Streamlit frontend for interacting with the model
+├── vlm.py # Vision-Language Model for generating suggestions
+├── openstreetmap_api.py # Script to fetch map images and amenities from OSM API
+├── highlight_pixels.py # Script to highlight specific areas on the image
+├── pipeline.py # Integrates the workflow from input to output
+├── requirements.txt # Required dependencies for the project
+└── README.md # Project documentation
+
 ```
 
-## **File Description**
+### **File Descriptions**
 
-- **`app.py`**: This file sets up a Streamlit-based web application for the frontend, allowing users to input a location and get city planning suggestions. It interacts with the VLM and displays the output text and the highlighted image.
+- **`app.py`**: Streamlit-based web application for the frontend, allowing users to input a city name, select key amenities, and describe the problem. It interacts with the VLM and displays the output text and highlighted solution map.
   
-- **`vlm.py`**: Contains the Vision-Language Model (VLM), which processes location-specific maps and provides planning suggestions. It outputs the suggestions as text and identifies key pixel coordinates for marking the map.
+- **`vlm.py`**: Contains the Vision-Language Model (VLM), which processes the map and problem description to provide planning suggestions. It outputs both text suggestions and coordinates where the suggested changes should be made.
 
-- **`google_maps.py`**: Handles Google Maps API requests to retrieve satellite or regional map images based on the provided location. The image is saved and passed to the VLM for further processing.
+- **`openstreetmap_api.py`**: Interacts with the OpenStreetMap API to retrieve a map image of the given city and marks selected amenities (like hospitals, gardens, etc.). The map includes a legend showing the location of the amenities.
 
-- **`highlight_pixels.py`**: A utility function that highlights specific areas of the map image based on coordinates provided by the VLM. It draws circles on the image to indicate important locations.
+- **`highlight_pixels.py`**: A utility function that highlights specific areas of the city map based on coordinates provided by the VLM. It uses OpenCV to draw circles around the suggested locations for improvement.
 
-- **`pipeline.py`**: Combines the entire workflow. It takes a location and prompt from the user, retrieves the map image, processes it through the VLM, and highlights areas on the map based on the suggestions. It returns both the planning suggestions and the highlighted image.
+- **`pipeline.py`**: The core integration of the project. It takes user input for the city, amenities, and a problem description, retrieves the map from OSM, processes it through the VLM, and highlights areas on the map based on the suggestions. It returns the planning suggestions as text and the modified map image.
+
+## **Installation and Setup**
+
+### **1. Clone the Repository**
+```bash
+git clone https://github.com/your-repository/city-planning-vlm-osm.git
+cd city-planning-vlm-osm
+```
 
 ## **Installation and Setup**
 
@@ -42,73 +50,83 @@ Make sure you have Python 3.x installed. Install the required packages by runnin
 pip install -r requirements.txt
 ```
 
-3. Set Up Google Maps API
-To retrieve maps based on location, you’ll need a Google Maps API key.
+### **3. Set Up OpenStreetMap API**
+To fetch maps and amenities for a specific city, this project uses the OpenStreetMap API.
 
-Go to the Google Cloud Console.
-Create a new project or select an existing one.
-Enable the Maps Static API and get your API key.
-Replace the placeholder in google_maps.py with your API key.
-python
-Copy code
-# google_maps.py
-API_KEY = 'your-google-maps-api-key-here'
+-The openstreetmap_api.py script is responsible for fetching the city map with marked amenities.
+-Make sure to configure the API settings (if needed) in the openstreetmap_api.py file.
 
 ### **4. Running the Application**
-# Frontend (Streamlit)
+#### Frontend (Streamlit)
 To start the Streamlit app, run:
-
 ```bash
 streamlit run app.py
 ```
-This will launch a web interface where you can input a location and receive planning suggestions along with the highlighted map.
 
-# Direct Execution via Pipeline
+This will start a web interface where you can input:
+-City Name: For example, "Mumbai"
+-Amenities to focus on: Such as "hospitals", "gardens"
+-Problem faced by the city: For example, "lack of healthcare facilities in the northern areas"
+
+The application will return:
+-Text Suggestions: Planning solutions generated by the VLM.
+-Highlighted Map: A map showing the suggested locations for improvement.
+
+#### Direct Execution via Pipeline
 Alternatively, you can run the entire process from the command line using the pipeline:
 
 ```bash
 python pipeline.py
 ```
-This will retrieve the map, process it through the VLM, and save the suggestions and highlighted map image locally.
+
+This will retrieve the map from OpenStreetMap, process it through the VLM, and save the suggestions and highlighted map locally.
+
 
 ### **5. Example Usage**
 
 Input:
-Location: Mumbai, India
-Prompt: "This area faces issues with hospital availability."
+-City Name: Bangalore
+-Amenities: Hospitals, Parks
+-Problem: "Insufficient healthcare facilities in the eastern areas."
 
 Output:
-Text Suggestions:
-Construct new hospitals in the eastern region.
-Improve transportation access to existing facilities.
-Allocate budget for healthcare infrastructure in the northern zones.
-Highlighted Map: The areas where hospitals should be constructed and transportation improved will be marked with red circles.
+-Text Suggestions:
+Construct new hospitals in the northeastern region.
+Improve access to parks and open spaces in the city center.
+Allocate budget for healthcare infrastructure in the eastern zones.
+Highlighted Map:
 
-### **TECHNICAL DETAILS**
+The locations where hospitals should be built or parks expanded will be marked with colored circles, and the map will display a legend.
 
-Vision-Language Model (VLM):
-The VLM processes the map and prompt to generate city planning suggestions.
-It also identifies key pixel coordinates on the map for visual highlighting.
-Google Maps API:
+### **Technical Details**
 
-Fetches the map image based on the user-provided location, which serves as input to the VLM.
-OpenCV for Image Highlighting:
+-Vision-Language Model (VLM):
 
-OpenCV is used to draw circles around key areas on the map image based on the coordinates provided by the VLM.
-Customization
+The VLM processes the city map image and problem description to generate text suggestions for urban improvements. It also identifies the coordinates of important areas where new infrastructure should be added.
 
-Modifying the VLM:
+-OpenStreetMap API:
+
+Fetches city-specific maps and marks selected amenities (hospitals, gardens, etc.) based on user input. The map also includes a legend for the marked amenities.
+
+-OpenCV for Image Highlighting:
+
+The highlight_pixels.py script uses OpenCV to draw circles around key areas on the map image where suggested improvements should be made, based on the coordinates provided by the VLM.
+
+### **Customization**
+
+#### Modifying the VLM:
 You can fine-tune the VLM by modifying the prompt.txt file or adjusting the model parameters in vlm.py. This can allow the model to focus on different aspects of urban planning or adapt it to different regions.
 
-Changing the Highlight Color or Radius:
+#### Changing the Highlight Color or Radius:
 You can customize the color and radius of the highlighted areas in highlight_pixels.py by adjusting the default parameters of the highlight_pixels function.
 
-python
-Copy code
+```python
 highlighted_image = highlight_pixels(image, coordinates, highlight_color=(0, 255, 0), radius=100)
-Contributing
+```
+
+### **Contributing**
 If you'd like to contribute to this project, feel free to fork the repository and submit pull requests. Any improvements or suggestions are welcome!
 
-License
+### **License**
 This project is licensed under the MIT License - see the LICENSE file for details.
 
