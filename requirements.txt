@@ -4,5 +4,5 @@ python-dotenv
 groq
 osmnx
 matplotlib
-cv2
+opencv-python
 numpy
