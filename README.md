@@ -94,8 +94,8 @@ Output:
 Construct new hospitals in the northeastern region.
 Improve access to parks and open spaces in the city center.
 Allocate budget for healthcare infrastructure in the eastern zones.
-Highlighted Map:
 
+-Highlighted Map:
 The locations where hospitals should be built or parks expanded will be marked with colored circles, and the map will display a legend.
 
 ### **Technical Details**
