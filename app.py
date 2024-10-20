@@ -81,7 +81,7 @@ prompt = st.text_input("Enter your prompt")
 city = st.text_input("Enter the city")
 
 # Dropdown for amenities
-amenities = st.selectbox("Select amenities", ["Amenity 1", "Amenity 2", "Amenity 3"])
+amenities = st.selectbox("Select Amenities", ["Amenity 1", "Amenity 2", "Amenity 3"])
 
 # Button to get city planning suggestions
 if st.button("Get City Planning Suggestions"):
