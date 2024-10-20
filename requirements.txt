@@ -2,3 +2,5 @@ streamlit
 Pillow
 python-dotenv
 groq
+osmnx
+PIL
