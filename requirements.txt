@@ -5,3 +5,4 @@ groq
 osmnx
 matplotlib
 cv2
+numpy
