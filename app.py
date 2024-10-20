@@ -3,6 +3,8 @@ from PIL import Image
 import sqlite3
 import os
 from vlm import get_city_planning_suggestions
+from openstreetmap_api import save_colored_city_map
+import cv2
 
 # Set up the SQLite database
 DATABASE_NAME = 'image_prompts.db'
@@ -136,7 +138,8 @@ if st.button("Get City Planning Suggestions"):
         with open(temp_image_path, "wb") as f:
             f.write(row[1])
             
-        map_image_path = get_google_maps_image(city)
+        map_image_path = "city_colored_map_with_amenities.jpg"
+        save_colored_city_map(city, amenities, filename=map_image_path)
         # Pass the path to the image instead of its content
         suggestions, coordinates = get_city_planning_suggestions(prompt, map_image_path) 
         
