@@ -3,5 +3,4 @@ Pillow
 python-dotenv
 groq
 osmnx
-PIL
 matplotlib
