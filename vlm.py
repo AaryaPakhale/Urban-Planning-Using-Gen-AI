@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 import os
 import base64
 import json
-
+os.environ['GROQ_API_KEY'] = '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'
 
 def encode_image(image_path):
   with open(image_path, "rb") as image_file:
