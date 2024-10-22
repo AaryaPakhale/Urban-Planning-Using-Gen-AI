@@ -283,10 +283,12 @@ if st.button("Get City Planning Suggestions"):
         # Try saving the city map with amenities and railways
         try:
             image = save_colored_city_map(city, amenities, filename=map_image_path)
-            st.image(image, caption=f"Map of {city} with {amenities}", use_column_width=True)
+            if image:
+                st.image(image, caption=f"Map of {city} with {amenities}", use_column_width=True)
+            else:
+                st.error("Map generation failed. Please check the inputs.")
         except Exception as e:
             st.error(f"Error generating map: {e}")
-            st.stop()
         
         # Now, get city planning suggestions based on the image and prompt
         try:
