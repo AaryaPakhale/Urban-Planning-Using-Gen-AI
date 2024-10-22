@@ -46,41 +46,41 @@
 # # Create the table if it doesn't exist
 # create_table()
 
-# # Custom CSS for styling
-# st.markdown(
-#     """
-#     <style>
-#     .stApp {
-#         background-image: url('https://www.creativefabrica.com/wp-content/uploads/2020/03/08/City-with-apartment-and-shooping-mall-Graphics-3366119-1.jpg '); /* Background image URL */
-#         background-size: cover; /* Cover the whole area */
-#         background-repeat: no-repeat;
-#         background-attachment: fixed;
-#     }
-#     .stTextInput, .stButton {
-#         background-color: rgba(0, 0, 0, 0.8); /* Input boxes background */
-#         border: 1px solid #c23e9d; /* Input boxes border */
-#         border-radius: 5px; /* Rounded corners */
-#         color: white; 
-#     }
-#     .stTextInput:focus, .stButton:hover {
-#         background-color: rgba(255, 255, 255, 1); /* Input boxes background on focus */
-#         border-color: #7500c0; /* Border color on focus */
-#     }
-#     .select-amenities-label {
-#         font-weight: bold; /* Make text bold */
-#         font-size: 20px; /* Increase font size by 5 units (assuming the base size is 15px) */
-#         color: black; /* Set text color to black */
-#         margin-bottom: 5px;
-#     }
-#     .creator-links {
-#         display: flex;
-#         justify-content: space-around;
-#         padding: 20px 0;
-#     }
-#     </style>
-#     """,
-#     unsafe_allow_html=True
-# )
+# Custom CSS for styling
+st.markdown(
+    """
+    <style>
+    .stApp {
+        background-image: url('https://www.creativefabrica.com/wp-content/uploads/2020/03/08/City-with-apartment-and-shooping-mall-Graphics-3366119-1.jpg '); /* Background image URL */
+        background-size: cover; /* Cover the whole area */
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
+    .stTextInput, .stButton {
+        background-color: rgba(0, 0, 0, 0.8); /* Input boxes background */
+        border: 1px solid #c23e9d; /* Input boxes border */
+        border-radius: 5px; /* Rounded corners */
+        color: white; 
+    }
+    .stTextInput:focus, .stButton:hover {
+        background-color: rgba(255, 255, 255, 1); /* Input boxes background on focus */
+        border-color: #7500c0; /* Border color on focus */
+    }
+    .select-amenities-label {
+        font-weight: bold; /* Make text bold */
+        font-size: 20px; /* Increase font size by 5 units (assuming the base size is 15px) */
+        color: black; /* Set text color to black */
+        margin-bottom: 5px;
+    }
+    .creator-links {
+        display: flex;
+        justify-content: space-around;
+        padding: 20px 0;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
 # # Streamlit app interface
 # st.markdown('<h1 class="title">Optimize City Planning Solution</h1>', unsafe_allow_html=True)
