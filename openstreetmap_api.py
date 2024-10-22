@@ -72,10 +72,11 @@ def save_colored_city_map(city_name, amenity, filename="city_colored_map_with_am
 
     # Fetch and plot amenities
     try:
-        amenity_data = ox.geometries_from_place(city_name, tags={'amenity': amenity})
-        print(f"Amenity data for {city_name} with amenity {amenity}:")
+        # Fetch and plot amenities
+        amenity_data = ox.geometries_from_place(city_name, tags={'amenity': amenities})
+        print(f"Amenity data for {city_name} with amenity {amenities}:")
         print(amenity_data.head())  # Show first few entries
-    except ox.errors.InsufficientResponseError as e:
+    except Exception as e:
         print(f"Error fetching amenities: {e}")
         return None
 
