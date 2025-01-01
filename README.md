@@ -132,5 +132,5 @@ highlighted_image = highlight_pixels(image, coordinates, highlight_color=(0, 255
 If you'd like to contribute to this project, feel free to fork the repository and submit pull requests. Any improvements or suggestions are welcome!
 
 ### **License**
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/AaryaPakhale/Urban-Planning-Using-Gen-AI/LICENSE) file for details.
 
